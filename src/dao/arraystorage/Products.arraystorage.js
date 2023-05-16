@@ -11,6 +11,10 @@ class ProductsArray {
         return length > 0 ? parseInt(this.array[length-1].id) + 1 : 1 
     }
 
+    async setArray( data ){
+        this.array = data
+    }
+
     async #paginate(limit=10, page=1, array){
         if(limit < 1){
             limit = 10

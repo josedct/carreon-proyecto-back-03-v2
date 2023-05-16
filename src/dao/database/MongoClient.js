@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {MONGO_URI} = require('./../config/env.config')
+const {MONGO_URI} = require('../../config/env.config')
 
 class MongoClient {
     constructor() {
@@ -16,3 +16,5 @@ class MongoClient {
     }
 
 }
+
+module.exports = MongoClient

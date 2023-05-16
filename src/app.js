@@ -22,6 +22,9 @@ server.engine('handlebars', handlebars.engine())
 server.set('views', path.join(__dirname, 'views'))
 server.set('view engine', 'handlebars')
 
+initializePassport()
+server.use(passport.initialize())
+
 server.use('/api/products', productsRouter.getRouter())
 server.use('/api/carts', cartsRouter.getRouter())
 server.use('/session',sessionRouter.getRouter())

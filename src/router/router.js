@@ -40,10 +40,10 @@ class CustomRouter{
     }
 
     generateCustomResponses = (req,res, next) => {
-        res.sendSuccess = payload => res.status(200).json({status:"success", payload})
+        res.sendSuccess = payload => res.status(200).json({status:"success", ...payload})
         res.sendServerError = error => res.status(500).json({status:"error", error})
         res.sendUserError = error => res.status(400).json({status:"error", error})
-        res.sendView = (viewName, payload) => res.render(viewName,{...payload}) 
+        res.sendView = (viewName, payload) => res.status(200).render(viewName,{...payload}) 
         next()
     }
 }

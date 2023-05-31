@@ -3,6 +3,7 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 const {PORT} =require('./config/env.config')
 const {addLogger} = require('./helpers/loggers')
+const LoggersRouter = require('./router/loggers.router')
 const ProductsRouter = require('./router/products.router')
 const CartsRouter = require('./router/carts.router')
 const SessionRouter = require('./router/session.router')
@@ -12,6 +13,7 @@ const client = new MongoClient()
 client.connect()
 
 const server = express()
+const loggersRouter = new LoggersRouter()
 const productsRouter = new ProductsRouter()
 const cartsRouter = new CartsRouter()
 const sessionRouter = new SessionRouter()
@@ -32,7 +34,7 @@ server.set('view engine', 'handlebars')
 
 
 
-
+server.use('/loggerTest', loggersRouter.getRouter())
 server.use('/api/products', productsRouter.getRouter())
 server.use('/api/carts', cartsRouter.getRouter())
 server.use('/session',sessionRouter.getRouter())

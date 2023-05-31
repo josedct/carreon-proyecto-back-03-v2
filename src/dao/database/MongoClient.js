@@ -10,6 +10,7 @@ class MongoClient {
     connect = async() => {
         try {
             await this.client.connect(MONGO_URI)
+            console.log('Db connected')
         } catch(error) {
             console.log(error)
         }

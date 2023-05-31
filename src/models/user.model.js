@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const userCollection = "users"
+const collection = "users"
 
-const userSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     first_name: {
         type: String,
         require:true
@@ -36,10 +36,8 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-userSchema.pre('findOne', function () {
+schema.pre('findOne', function () {
     this.populate('cart')
 }) 
 
-const UserModel = mongoose.model(userCollection, userSchema)
-
-module.exports = UserModel
+module.exports = {collection, schema}

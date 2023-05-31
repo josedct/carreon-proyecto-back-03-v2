@@ -4,21 +4,31 @@ const UserModel = require('../../models/product.model')
 class UsersDB{
 
     constructor(){
-        this.model = mongoose.model(UserModel.collectionName, UserModel.schema)
+        this.model = mongoose.model(UserModel.collection, UserModel.schema)
     }
 
     async queryOne(nickname){
         try {
-            await this.model.findOne({ email: nickname})
+            console.log()
+            const response = await this.model.findOne({ email: nickname})
+            console.log()
+            return response
         } catch (error) {
+            console.log()
+            console.log(error)
             return undefined
         }
     }
 
     async create(data){
         try {
-            await this.model.create(data)
+            console.log()
+            const response = await this.model.create(data)
+            console.log()
+            return response
         } catch (error) {
+            console.log()
+            console.log(error)
             return undefined
         }
     }

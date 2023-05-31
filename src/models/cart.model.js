@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const cartCollection = 'carts'
+const collection = 'carts'
 
 const productSchema = new mongoose.Schema({
         product: {
@@ -17,16 +17,15 @@ const productSchema = new mongoose.Schema({
     ,{_id: false}
 )
 
-const cartSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     products: {
         type: [productSchema],
         default: []
     }
 })
 
-cartSchema.pre('findOne', function () {
+schema.pre('findOne', function () {
     this.populate('products.product')
 }) 
 
-const CartModel = mongoose.model(cartCollection,cartSchema)
-module.exports = CartModel
+module.exports = {collection,schema}

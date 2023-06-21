@@ -17,8 +17,6 @@ const addProductToCart = async (req, res) => {
 
     const findPid = await ProductsService.selectOne(pid)
 
-    findPid.queryStatus
-
     if(!findPid.queryStatus || findPid.dataProduct === null){
         return res.sendSuccess({msg: 'no found'})
     }
@@ -32,7 +30,16 @@ const updProductsToCart = async (req, res) => {
     const {cid} = req.params
     const arrayProducts = req.body
 
-    const auxProducts = arrayProducts.map( prod => {
+    const validIds = arrayProducts.filter( async data => {
+        const findPid = await ProductsService.selectOne(data.id)
+        return !(!findPid.queryStatus || findPid.dataProduct === null)
+    })
+
+    if( validIds.length < 1 ){
+        return res.sendSuccess({msg: 'array empty'})
+    }
+
+    const auxProducts = validIds.map( prod => {
         return { product : {_id : prod.id}, quantity : prod.quantity }
     })
 

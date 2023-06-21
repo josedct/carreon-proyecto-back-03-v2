@@ -21,11 +21,11 @@ class CartsRepository {
     }
 
     //addOneChild
-    async addToCart(idp, idch){
+    async addToCart(idp, idch){ 
 
         let response = await this.CartsDao.updateQuantityOfChild(idp, idch, 0)
 
-        if(response.modifiedCount > 0){
+        if(response.dataUpdate.modifiedCount > 0){
             return response
         }
 

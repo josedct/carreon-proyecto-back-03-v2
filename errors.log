@@ -1,1 +1,3 @@
 {"level":"error","message":"Logger Error"}
+{"level":"fatal","message":"Logger Fatal"}
+{"level":"fatal","message":"Logger Fatal"}

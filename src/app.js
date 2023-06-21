@@ -1,6 +1,8 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const path = require('path')
+const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerUiExpress = require('swagger-ui-express')
 const {PORT} =require('./config/env.config')
 const {addLogger} = require('./helpers/loggers')
 const LoggersRouter = require('./router/loggers.router')
@@ -32,7 +34,19 @@ server.set('view engine', 'handlebars')
 //initializePassport()
 //server.use(passport.initialize())
 
+const swaggerOptions = {
+    definition:{
+        openapi: '3.0.1',
+        info:{
+            title: 'Documentacion de Proyecto Ecommerce CoderHouse',
+            description: 'API de server Ecommerce'
+        }
+    },
+    apis: ['./docs/**/*.yaml']
+}
 
+const specs = swaggerJSDoc(swaggerOptions)
+server.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 server.use('/loggerTest', loggersRouter.getRouter())
 server.use('/api/products', productsRouter.getRouter())
